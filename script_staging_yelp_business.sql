@@ -2,63 +2,8 @@
 USE DATABASE "UDACITY_FINAL_PROJECT";
 USE SCHEMA "UDACITY_FINAL_PROJECT"."STAGING_SCHEMA";
 
-
-CREATE OR REPLACE TABLE yelp_business (
-    business_id TEXT,
-    name TEXT,
-    address TEXT,
-    city TEXT,
-    state TEXT,
-    postal_code INT,
-    latitude FLOAT,
-    longitude FLOAT,
-    stars NUMERIC(3,2),
-    review_count INT,
-    is_open INT,
-    attributes_NoiseLevel TEXT,
-    attributes_BikeParking BOOLEAN,
-    attributes_RestaurantsAttire TEXT,
-    attributes_BusinessAcceptsCreditCards BOOLEAN,
-    attributes_BusinessParking TEXT,
-    attributes_RestaurantsReservations TEXT,
-    attributes_GoodForKids BOOLEAN,
-    attributes_RestaurantsTakeOut BOOLEAN,
-    attributes_Caters BOOLEAN,
-    attributes_WiFi TEXT,
-    attributes_RestaurantsDelivery BOOLEAN,
-    attributes_HasTV BOOLEAN,
-    attributes_RestaurantsPriceRange2 INT,
-    attributes_Alcohol TEXT,
-    attributes_Music TEXT,
-    attributes_BusinessAcceptsBitcoin BOOLEAN,
-    attributes_GoodForDancing BOOLEAN,
-    attributes_DogsAllowed BOOLEAN,
-    attributes_BestNights TEXT,
-    attributes_RestaurantsGoodForGroups BOOLEAN,
-    attributes_OutdoorSeating BOOLEAN,
-    attributes_HappyHour BOOLEAN,
-    attributes_RestaurantsTableService BOOLEAN,
-    attributes_GoodForMeal TEXT,
-    attributes_WheelchairAccessible BOOLEAN,
-    attributes_Ambience TEXT,
-    attributes_CoatCheck BOOLEAN,
-    attributes_DriveThru BOOLEAN,
-    attributes_Smoking TEXT,
-    attributes_BYOB BOOLEAN,
-    attributes_Corkage BOOLEAN,
-    categories TEXT,
-    hours_Monday TEXT,
-    hours_Tuesday TEXT,
-    hours_Wednesday TEXT,
-    hours_Thursday TEXT,
-    hours_Friday TEXT,
-    hours_Saturday TEXT,
-    hours_Sunday TEXT
-);
-
-
 /* Create or replace a file format */
-CREATE OR REPLACE FILE FORMAT file_csv_format
+CREATE OR REPLACE FILE FORMAT file_json_format
     FIELD_DELIMITER = NONE
     RECORD_DELIMITER = '\\n';
 
@@ -66,7 +11,7 @@ CREATE OR REPLACE FILE FORMAT file_csv_format
 /* Similar to temporary tables, temporary stages are automatically dropped at the end of the session.         */
 
 CREATE OR REPLACE TEMPORARY STAGE large_file_stage
-    FILE_FORMAT = file_csv_format;
+    FILE_FORMAT = file_json_format;
 
 /* Stage the data file.                                                                                       */
 PUT file://C:\temp\Udacity\Yelp\yelp_academic_dataset_business.json @large_file_stage auto_compress=true parallel=4;

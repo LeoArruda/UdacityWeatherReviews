@@ -2,13 +2,6 @@
 USE DATABASE "UDACITY_FINAL_PROJECT";
 USE SCHEMA "UDACITY_FINAL_PROJECT"."STAGING_SCHEMA";
 
-CREATE OR REPLACE TABLE weather_precipitation (
-	date DATE,
-	precipitation TEXT,
-	precipitation_normal FLOAT
-	
-);
-
 /* Create or replace a file format */
 CREATE OR REPLACE FILE FORMAT file_csv_format
 	FIELD_DELIMITER = ','

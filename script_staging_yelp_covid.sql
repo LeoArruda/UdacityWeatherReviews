@@ -2,20 +2,8 @@
 USE DATABASE "UDACITY_FINAL_PROJECT";
 USE SCHEMA "UDACITY_FINAL_PROJECT"."STAGING_SCHEMA";
 
-CREATE OR REPLACE TABLE yelp_covid (
-    business_id TEXT,
-    highlights TEXT,
-    delivery_or_takeout TEXT,
-    grubhub_enabled TEXT,
-    call_to_action_enabled TEXT,
-    request_a_quote_enabled TEXT,
-    covid_banner TEXT,
-    temporary_closed_until TEXT,
-    virtual_services_offered TEXT
-);
-
 /* Create or replace a file format */
-CREATE OR REPLACE FILE FORMAT file_csv_format
+CREATE OR REPLACE FILE FORMAT file_json_format
     FIELD_DELIMITER = NONE
     RECORD_DELIMITER = '\\n';
 
@@ -23,7 +11,7 @@ CREATE OR REPLACE FILE FORMAT file_csv_format
 /* Similar to temporary tables, temporary stages are automatically dropped at the end of the session.         */
 
 CREATE OR REPLACE TEMPORARY STAGE large_file_stage
-    FILE_FORMAT = file_csv_format;
+    FILE_FORMAT = file_json_format;
 
 /* Stage the data file.                                                                                       */
 PUT file://C:\temp\Udacity\Yelp\yelp_academic_dataset_covid_features.json @large_file_stage auto_compress=true parallel=4;

@@ -2,36 +2,8 @@
 USE DATABASE "UDACITY_FINAL_PROJECT";
 USE SCHEMA "UDACITY_FINAL_PROJECT"."STAGING_SCHEMA";
 
-
-CREATE OR REPLACE TABLE yelp_user (
-    user_id TEXT,
-    name TEXT,
-    review_count INT,
-    yelping_since DATETIME,
-    useful INT,
-    funny INT,
-    cool INT,
-    elite TEXT,
-    friends TEXT,
-    fans INT,
-    average_stars NUMERIC(3,2),
-    compliment_hot INT,
-    compliment_more INT,
-    compliment_profile INT,
-    compliment_cute INT,
-    compliment_list INT,
-    compliment_note INT,
-    compliment_plain INT,
-    compliment_cool INT,
-    compliment_funny INT,
-    compliment_writer INT,
-    compliment_photos INT
-);
-
-
-
 /* Create or replace a file format */
-CREATE OR REPLACE FILE FORMAT file_csv_format
+CREATE OR REPLACE FILE FORMAT file_json_format
     FIELD_DELIMITER = NONE
     RECORD_DELIMITER = '\\n';
 
@@ -39,7 +11,7 @@ CREATE OR REPLACE FILE FORMAT file_csv_format
 /* Similar to temporary tables, temporary stages are automatically dropped at the end of the session.         */
 
 CREATE OR REPLACE TEMPORARY STAGE large_file_stage
-    FILE_FORMAT = file_csv_format;
+    FILE_FORMAT = file_json_format;
 
 /* Stage the data file.                                                                                       */
 PUT file://C:\temp\Udacity\Yelp\yelp_academic_dataset_user.json @large_file_stage auto_compress=true parallel=4;

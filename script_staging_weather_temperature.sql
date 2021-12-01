@@ -3,15 +3,6 @@ USE DATABASE "UDACITY_FINAL_PROJECT";
 USE SCHEMA "UDACITY_FINAL_PROJECT"."STAGING_SCHEMA";
 
 
-CREATE OR REPLACE TABLE weather_temperature (
-	date DATE,
-	min FLOAT,
-	max FLOAT,
-	normal_min FLOAT,
-	normal_max FLOAT
-);
-
-
 /* Create or replace a file format */
 CREATE OR REPLACE FILE FORMAT file_csv_format
 	FIELD_DELIMITER = ','
