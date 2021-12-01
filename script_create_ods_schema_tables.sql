@@ -89,7 +89,8 @@ CREATE OR REPLACE TABLE date_time (
     day                 INT,
     month               INT,
     year                INT,
-	week                INT
+	week                INT,
+	quarter             INT
 );
 
 /* Table user */
