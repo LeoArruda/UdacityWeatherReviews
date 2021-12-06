@@ -107,7 +107,10 @@ FROM ODS_SCHEMA.user as user;
 Create Dimension table business 
 ==========================================================================================================
 */
-INSERT INTO dimBusiness ( business_id,name,stars,review_count,is_open,categories,location_address,location_city,location_state,location_postal_code,location_latitude,location_longitude,checkin_date,covid_highlights,covid_delivery_or_takeout,covid_grubhub_enabled,covid_call_to_action_enabled,covid_request_a_quote_enabled,covid_covid_banner,covid_temporary_closed_until,covid_virtual_services_offered )
+INSERT INTO dimBusiness ( business_id,name,stars,review_count,is_open,categories,location_address,location_city,
+                        location_state,location_postal_code,location_latitude,location_longitude,checkin_date,
+                        covid_highlights,covid_delivery_or_takeout,covid_grubhub_enabled,covid_call_to_action_enabled,
+                        covid_request_a_quote_enabled,covid_covid_banner,covid_temporary_closed_until,covid_virtual_services_offered )
 SELECT business.business_id,
        business.name,
        business.stars,
