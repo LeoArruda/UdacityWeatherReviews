@@ -27,7 +27,7 @@ Enter any city or zip code. (note not all cities are included, please use one of
 
 ## Deliverables
 
-1. Data Architecture Diagram - Link: [Diagram](./screenshots/Udacity-Data_Architecture_Diagram.PNG)
+1. Data Architecture Diagram - Link: [Diagram](./screenshots/Udacity-Data_Architecture_Diagram.png)
 2. Screenshot of 6 tables created upon upload of YELP data - Link: [Yelp Data](./screenshots/s1-Yelp-data.PNG)
 3. Screenshot of 2 tables created upon upload of climate data - Link: [Climate Data](./screenshots/s2-Climate-data.PNG)
 4. Scripts to load files to Staging.
@@ -40,27 +40,27 @@ Enter any city or zip code. (note not all cities are included, please use one of
    7. Staging yelp tip - Link: [Staging yelp tip](./script_staging_yelp_tip.sql)
    8. Staging yelp user - Link: [Staging yelp user](./script_staging_yelp_user.sql)
 
-4. SQL queries code that transform from staging  -> ODS  - Link: [ETL Staging to ODS](./script_etl_staging_to_ods.sql)
+5. SQL queries code that transform from staging  -> ODS  - Link: [ETL Staging to ODS](./script_etl_staging_to_ods.sql)
 
-5. SQL queries code that use JSON functions to transform data from a single JSON structure of staging to multiple columns of ODS. 
+6. SQL queries code that use JSON functions to transform data from a single JSON structure of staging to multiple columns of ODS. 
    1. Screenshot: [JSON Function](./screenshots/s5-query-JSON-functions.PNG)
    2. Example: [JSON Function Script](./script_staging_yelp_user.sql)
 
-6. Screenshot of table with three columns: raw files, staging, and ODS. (and sizes) 
+7. Screenshot of table with three columns: raw files, staging, and ODS. (and sizes) 
    1. Screenshot of table with three columns -> Link:  [table with size columns](./screenshots//Udacity-Table-File-sizes.PNG)
    2. Sample SQL code to list table sizes -> Link: [Raw files, staging and ODS](./screenshots/s6-query-ODS-yelp-climate.PNG)
 
-7. ER Diagram
-    1. ODS Diagram - Link: [ODS Schema](./screenshots/Udacity-ODS_Schema.PNG)
+8. ER Diagram
+    1. ODS Diagram - Link: [ODS Schema](./screenshots/Udacity-ODS_Schema.png)
   
-8. SQL queries code to integrate climate and Yelp data.
+9. SQL queries code to integrate climate and Yelp data.
    1. Screenshot of the query to [integrate climate and Yelp data](./screenshots/s6-query-ODS-yelp-climate.PNG)
    2. Query Code on how to [integrate climate and Yelp data](./script_query_ods.sql)
 
 
-9. STAR schema
+10. STAR schema
    1. DW  Star Schema - Link: [DW Schema](./screenshots/Udacity-DW_Schema.PNG)
 
-10. SQL queries code necessary to move the data from ODS to DWH. -> Link: [ETL ODS to DW](./script_etl_ods_to_dw.sql)
+11. SQL queries code necessary to move the data from ODS to DWH. -> Link: [ETL ODS to DW](./script_etl_ods_to_dw.sql)
 
-11. SQL queries code that report business name, temperature, precipitation, and ratings. -> Link: [DW Query](./script_query_dw.sql)
+12. SQL queries code that report business name, temperature, precipitation, and ratings. -> Link: [DW Query](./script_query_dw.sql)
