@@ -4,11 +4,8 @@
   SQL-Script to load the data from staging to ODS
 
 ==========================================================================================================
-*/
 
 
-
-/*
 ==========================================================================================================
 Select/use database and schema 
 ==========================================================================================================
@@ -38,7 +35,8 @@ INSERT INTO location (address, city, state, postal_code, latitude, longitude)
 SELECT ybusiness.address, ybusiness.city, ybusiness.state, ybusiness.postal_code, ybusiness.latitude, ybusiness.longitude
 FROM STAGING_SCHEMA.yelp_business AS ybusiness
 QUALIFY ROW_NUMBER() 
-OVER (PARTITION BY ybusiness.state, ybusiness.postal_code, ybusiness.city, ybusiness.address ORDER BY ybusiness.state, ybusiness.postal_code, ybusiness.city, ybusiness.address) = 1;
+    OVER (PARTITION BY ybusiness.state, ybusiness.postal_code, ybusiness.city, ybusiness.address 
+              ORDER BY ybusiness.state, ybusiness.postal_code, ybusiness.city, ybusiness.address) = 1;
 
 /*
 ==========================================================================================================
@@ -84,8 +82,8 @@ Loading business_attributes data from staging to ods
 */
 INSERT INTO business_attributes (
 		business_id,NoiseLevel,BikeParking,RestaurantsAttire,BusinessAcceptsCreditCards,BusinessParking,RestaurantsReservations,GoodForKids,RestaurantsTakeOut,Caters, 						
-		WiFi,RestaurantsDelivery,HasTV,RestaurantsPriceRange2,Alcohol,Music,BusinessAcceptsBitcoin,GoodForDancing,DogsAllowed,BestNights,RestaurantsGoodForGroups,
-		OutdoorSeating,HappyHour,RestaurantsTableService,GoodForMeal,WheelchairAccessible,Ambience,CoatCheck,DriveThru,Smoking,BYOB,Corkage )
+		WiFi,RestaurantsDelivery,HasTV,RestaurantsPriceRange2,Alcohol,Music,BusinessAcceptsBitcoin,GoodForDancing,DogsAllowed,BestNights,
+		RestaurantsGoodForGroups,OutdoorSeating,HappyHour,RestaurantsTableService,GoodForMeal,WheelchairAccessible,Ambience,CoatCheck,DriveThru,Smoking,BYOB,Corkage )
 SELECT 	ybusiness.business_id,
 		ybusiness.attributes_NoiseLevel,
 		ybusiness.attributes_BikeParking,
@@ -183,10 +181,32 @@ FROM STAGING_SCHEMA.yelp_tip AS ytip;
 Loading checkin data from staging.yelping_checkin table to ods
 ==========================================================================================================
 */
-INSERT INTO checkin (business_id, date)
-SELECT ycheck.business_id, ycheck.date
-FROM STAGING_SCHEMA.yelp_checkin AS ycheck;
+INSERT INTO checkin (business_id, timestamp)
+SELECT ycheck.business_id, 
+       CAST(F.value AS DATETIME)AS DATE
+FROM   STAGING_SCHEMA.yelp_checkin AS ycheck, 
+       LATERAL Flatten(input => split(ycheck.DATE,',')) AS F;
 
+/*
+==========================================================================================================
+Loading timestamps - checkin - from checkin table to date_time table
+==========================================================================================================
+*/
+INSERT INTO date_time (timestamp, date, day, month, year, week, quarter)
+SELECT checkin.timestamp,
+       DATE(checkin.timestamp),
+       DAY(checkin.timestamp),
+       MONTH(checkin.timestamp),
+       YEAR(checkin.timestamp),
+	   WEEK(checkin.timestamp),
+	   QUARTER(checkin.timestamp)
+FROM ODS_SCHEMA.checkin AS checkin
+WHERE checkin.timestamp NOT IN (SELECT timestamp FROM date_time);
+
+
+/*SELECT ycheck.business_id, TRY_CAST(ycheck.date AS DATE)
+FROM STAGING_SCHEMA.yelp_checkin AS ycheck;
+*/
 
 /*
 ==========================================================================================================
@@ -234,7 +254,7 @@ Loading temperature data from staging.weather_temperature table to ods
 ==========================================================================================================
 */
 INSERT INTO temperature (date, temp_min, temp_max, temp_normal_min, temp_normal_max)
-SELECT wtemp.date, wtemp.min, wtemp.max, wtemp.normal_min, wtemp.normal_max
+SELECT TO_DATE(wtemp.date, 'YYYYMMDD'), wtemp.min, wtemp.max, wtemp.normal_min, wtemp.normal_max
 FROM STAGING_SCHEMA.weather_temperature AS wtemp;
 
 /*
@@ -243,5 +263,5 @@ Loading precipitation data from staging.weather_precipitation table to ods
 ==========================================================================================================
 */
 INSERT INTO precipitation (date, precipitation, precipitation_normal)
-SELECT wprec.date, TRY_CAST(wprec.precipitation AS FLOAT), wprec.precipitation_normal
+SELECT TO_DATE(wprec.date, 'YYYYMMDD'), TRY_CAST(wprec.precipitation AS FLOAT), wprec.precipitation_normal
 FROM STAGING_SCHEMA.weather_precipitation AS wprec;

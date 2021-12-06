@@ -120,14 +120,14 @@ CREATE OR REPLACE TABLE yelp_user (
 );
 
 CREATE OR REPLACE TABLE weather_precipitation (
-	date DATE,
+	date TEXT,
 	precipitation TEXT,
 	precipitation_normal FLOAT
 	
 );
 
 CREATE OR REPLACE TABLE weather_temperature (
-	date DATE,
+	date TEXT,
 	min FLOAT,
 	max FLOAT,
 	normal_min FLOAT,

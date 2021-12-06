@@ -10,7 +10,7 @@ USE SCHEMA "UDACITY_FINAL_PROJECT"."ODS_SCHEMA";
 
 /* Table location */
 CREATE OR REPLACE TABLE location (
-    location_id     INT         PRIMARY KEY  IDENTITY,
+    location_id     INT      PRIMARY KEY  IDENTITY,
     address         TEXT,
     city            TEXT,
     state           TEXT,
@@ -21,7 +21,7 @@ CREATE OR REPLACE TABLE location (
 
 /* Table business */
 CREATE OR REPLACE TABLE business (
-    business_id         TEXT    PRIMARY KEY,
+    business_id         TEXT   PRIMARY KEY,
     name                TEXT,
     location_id         INT,
     stars               NUMERIC(3,2),
@@ -33,7 +33,7 @@ CREATE OR REPLACE TABLE business (
 
 /* Table business attributes*/
 CREATE OR REPLACE TABLE business_attributes (
-    business_id         		TEXT                PRIMARY KEY,
+    business_id         		TEXT     PRIMARY KEY,
     NoiseLevel 					TEXT,
     BikeParking 				BOOLEAN,
     RestaurantsAttire 			TEXT,
@@ -70,7 +70,7 @@ CREATE OR REPLACE TABLE business_attributes (
 
 /* Table business hours*/
 CREATE OR REPLACE TABLE business_hours (
-    business_id       TEXT      PRIMARY KEY,
+    business_id       TEXT   PRIMARY KEY,
     monday            TEXT,
 	tuesday           TEXT,
 	wednesday         TEXT,
@@ -95,7 +95,7 @@ CREATE OR REPLACE TABLE date_time (
 
 /* Table user */
 CREATE OR REPLACE TABLE user (
-    user_id             TEXT            PRIMARY KEY,
+    user_id             TEXT      PRIMARY KEY,
     name                TEXT,
     review_count        INT,
     yelping_since       DATETIME,
@@ -122,7 +122,7 @@ CREATE OR REPLACE TABLE user (
 
 /* Table tip */
 CREATE OR REPLACE TABLE tip (
-    tip_id              INT         PRIMARY KEY     IDENTITY,
+    tip_id              INT  PRIMARY KEY   IDENTITY,
     user_id             TEXT,
     business_id         TEXT,
     text                TEXT,
@@ -135,7 +135,7 @@ CREATE OR REPLACE TABLE tip (
 
 /* Table review */
 CREATE OR REPLACE TABLE review (
-    review_id           TEXT        PRIMARY KEY,
+    review_id           TEXT   PRIMARY KEY,
     user_id             TEXT,
     business_id         TEXT,
     stars               NUMERIC(3,2),
@@ -151,15 +151,15 @@ CREATE OR REPLACE TABLE review (
 
 /* Table checkin */
 CREATE OR REPLACE TABLE checkin (
-    checkin_id          INT     PRIMARY KEY         IDENTITY,
+    checkin_id          INT     PRIMARY KEY  IDENTITY,
     business_id         TEXT,
-    date                TEXT,
+    timestamp           DATETIME,
     CONSTRAINT FK_CHECKIN_BUSINESS_ID FOREIGN KEY(business_id)    REFERENCES  business(business_id)
 );
 
 /* Table covid */
 CREATE OR REPLACE TABLE covid (
-    covid_id                    INT     PRIMARY KEY         IDENTITY,
+    covid_id                    INT     PRIMARY KEY  IDENTITY,
     business_id                 TEXT,
     highlights                  TEXT,
     delivery_or_takeout         TEXT,
@@ -169,12 +169,12 @@ CREATE OR REPLACE TABLE covid (
     covid_banner                TEXT,
     temporary_closed_until      TEXT,
     virtual_services_offered    TEXT,
-    CONSTRAINT FK_COVID_BUSINESS_ID         FOREIGN KEY(business_id)    REFERENCES  business(business_id)
+    CONSTRAINT FK_COVID_BUSINESS_ID   FOREIGN KEY(business_id)    REFERENCES  business(business_id)
 );
 
 /* Table temperature */
 CREATE OR REPLACE TABLE temperature (
-    temperature_id              INT     PRIMARY KEY         IDENTITY,
+    temperature_id              INT     PRIMARY KEY  IDENTITY,
     date                        DATE,
     temp_min                    FLOAT,
     temp_max                    FLOAT,
@@ -184,7 +184,7 @@ CREATE OR REPLACE TABLE temperature (
 
 /* Table precipitation */
 CREATE OR REPLACE TABLE precipitation (
-    precipitation_id            INT     PRIMARY KEY         IDENTITY,
+    precipitation_id            INT     PRIMARY KEY  IDENTITY,
     date                        DATE,
     precipitation               FLOAT,
     precipitation_normal        FLOAT
