@@ -22,10 +22,10 @@ USE SCHEMA "UDACITY_FINAL_PROJECT"."DW_SCHEMA";
 
 TRUNCATE TABLE dimBusiness;
 TRUNCATE TABLE dimDate;
-TRUNCATE TABLE dimPrecipitation;
-TRUNCATE TABLE dimTemperature;
+TRUNCATE TABLE dimWeather;
 TRUNCATE TABLE dimUser;
 TRUNCATE TABLE factReview;
+
 
 
 /* 
@@ -47,27 +47,20 @@ FROM ODS_SCHEMA.date_time AS dtime;
 
 /*
 ==========================================================================================================
-Load Dimension table Temperature 
+Load Dimension table Weather 
 ==========================================================================================================
 */
-INSERT INTO dimTemperature ( date,temp_min,temp_max,temp_normal_min,temp_normal_max )
+INSERT INTO dimWeather ( date,temp_min,temp_max,temp_normal_min,temp_normal_max, precipitation, precipitation_normal )
 SELECT temp.date,
        temp.temp_min,
        temp.temp_max,
        temp.temp_normal_min,
-       temp.temp_normal_max
-FROM ODS_SCHEMA.temperature AS temp;
-
-/*
-==========================================================================================================
-Load Dimension table Precipitation 
-==========================================================================================================
-*/
-INSERT INTO dimPrecipitation ( date,precipitation,precipitation_normal)
-SELECT pre.date ,
+       temp.temp_normal_max,
        pre.precipitation,
        pre.precipitation_normal
-FROM ODS_SCHEMA.precipitation as pre;
+FROM ODS_SCHEMA.precipitation as pre
+INNER JOIN ODS_SCHEMA.temperature AS temp
+ON pre.date = temp.date;
 
 /* 
 ==========================================================================================================
@@ -104,7 +97,7 @@ FROM ODS_SCHEMA.user as user;
 
 /* 
 ==========================================================================================================
-Create Dimension table business 
+Load Dimension table business 
 ==========================================================================================================
 */
 INSERT INTO dimBusiness ( business_id,name,stars,review_count,is_open,categories,location_address,location_city,

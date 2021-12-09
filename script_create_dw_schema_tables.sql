@@ -92,27 +92,19 @@ CREATE OR REPLACE TABLE dimUser (
 
 /*
 ==========================================================================================================
-Create Dimension table Temperature 
+Create Dimension table Weather (Consolidating Temperature and Precipitation) 
 ==========================================================================================================
 */
-CREATE OR REPLACE TABLE dimTemperature (
+CREATE OR REPLACE TABLE dimWeather (
     date                        DATE    PRIMARY KEY,
     temp_min                    FLOAT,
     temp_max                    FLOAT,
     temp_normal_min             FLOAT,
-    temp_normal_max             FLOAT
-);
-
-/*
-==========================================================================================================
-Create Dimension table Precipitation 
-==========================================================================================================
-*/
-CREATE OR REPLACE TABLE dimPrecipitation (
-    date                        DATE   PRIMARY KEY,
+    temp_normal_max             FLOAT,
     precipitation               FLOAT,
     precipitation_normal        FLOAT
 );
+
 
 /* 
 ==========================================================================================================
@@ -133,6 +125,5 @@ CREATE OR REPLACE TABLE factReview (
 	CONSTRAINT FK_FACT_REVIEW_DIMBUSINESS_ID              FOREIGN KEY(business_id)    REFERENCES  dimBusiness(business_id),
     CONSTRAINT FK_FACT_REVIEW_DIMUSER_ID                  FOREIGN KEY(user_id)        REFERENCES  dimUser(user_id),
     CONSTRAINT FK_FACT_REVIEW_TIMESTAMP_DIMDATE_TIMESTAMP FOREIGN KEY(timestamp)      REFERENCES  dimDate(timestamp),
-	CONSTRAINT FK_FACT_REVIEW_DATE_DIMPRECIPITATION_DATE  FOREIGN KEY(date)           REFERENCES  dimPrecipitation(date),
-	CONSTRAINT FK_FACT_REVIEW_DATE_DIMTEMPERATURE_DATE    FOREIGN KEY(date)           REFERENCES  dimTemperature(date)
+	CONSTRAINT FK_FACT_REVIEW_DATE_DIMWEATHER_DATE        FOREIGN KEY(date)           REFERENCES  dimWeather(date)
 );

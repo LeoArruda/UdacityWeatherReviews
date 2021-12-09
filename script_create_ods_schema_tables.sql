@@ -19,7 +19,11 @@ CREATE OR REPLACE TABLE location (
     longitude       FLOAT
 );
 
-/* Table business */
+/* 
+==========================================================================================================
+Create Business table 
+==========================================================================================================
+*/
 CREATE OR REPLACE TABLE business (
     business_id         TEXT   PRIMARY KEY,
     name                TEXT,
@@ -31,7 +35,12 @@ CREATE OR REPLACE TABLE business (
     CONSTRAINT FK_BUSINESS_LOCATION_ID FOREIGN KEY(location_id)    REFERENCES  location(location_id)
 );
 
-/* Table business attributes*/
+
+/* 
+==========================================================================================================
+Create Business Attributes table 
+==========================================================================================================
+*/
 CREATE OR REPLACE TABLE business_attributes (
     business_id         		TEXT     PRIMARY KEY,
     NoiseLevel 					TEXT,
@@ -68,7 +77,11 @@ CREATE OR REPLACE TABLE business_attributes (
 	CONSTRAINT FK_BUSINESS_ATTRIBUTE_BUSINESS_ID FOREIGN KEY(business_id)    REFERENCES  business(business_id)
 );
 
-/* Table business hours*/
+/* 
+==========================================================================================================
+Create Business table 
+==========================================================================================================
+*/
 CREATE OR REPLACE TABLE business_hours (
     business_id       TEXT   PRIMARY KEY,
     monday            TEXT,
@@ -82,7 +95,11 @@ CREATE OR REPLACE TABLE business_hours (
 );
 
 
-/* Table date_time */
+/* 
+==========================================================================================================
+Create Date Time table 
+==========================================================================================================
+*/
 CREATE OR REPLACE TABLE date_time (
     timestamp           DATETIME    PRIMARY KEY,
     date                DATE,
@@ -93,7 +110,11 @@ CREATE OR REPLACE TABLE date_time (
 	quarter             INT
 );
 
-/* Table user */
+/* 
+==========================================================================================================
+Create User table 
+==========================================================================================================
+*/
 CREATE OR REPLACE TABLE user (
     user_id             TEXT      PRIMARY KEY,
     name                TEXT,
@@ -120,7 +141,11 @@ CREATE OR REPLACE TABLE user (
     CONSTRAINT FK_USER_DATE_TIME_ID FOREIGN KEY(yelping_since)      REFERENCES  date_time(timestamp)
 );
 
-/* Table tip */
+/* 
+==========================================================================================================
+Create Tip table 
+==========================================================================================================
+*/
 CREATE OR REPLACE TABLE tip (
     tip_id              INT  PRIMARY KEY   IDENTITY,
     user_id             TEXT,
@@ -133,7 +158,11 @@ CREATE OR REPLACE TABLE tip (
     CONSTRAINT FK_TIP_DATE_TIME_ID FOREIGN KEY(timestamp)      REFERENCES  date_time(timestamp)
 );
 
-/* Table review */
+/* 
+==========================================================================================================
+Create Review table 
+==========================================================================================================
+*/
 CREATE OR REPLACE TABLE review (
     review_id           TEXT   PRIMARY KEY,
     user_id             TEXT,
@@ -149,7 +178,11 @@ CREATE OR REPLACE TABLE review (
     CONSTRAINT FK_REVIEW_DATE_TIME_ID FOREIGN KEY(timestamp)      REFERENCES  date_time(timestamp)
 );
 
-/* Table checkin */
+/* 
+==========================================================================================================
+Create Chekin table 
+==========================================================================================================
+*/
 CREATE OR REPLACE TABLE checkin (
     checkin_id          INT     PRIMARY KEY  IDENTITY,
     business_id         TEXT,
@@ -157,7 +190,11 @@ CREATE OR REPLACE TABLE checkin (
     CONSTRAINT FK_CHECKIN_BUSINESS_ID FOREIGN KEY(business_id)    REFERENCES  business(business_id)
 );
 
-/* Table covid */
+/* 
+==========================================================================================================
+Create Covid table 
+==========================================================================================================
+*/
 CREATE OR REPLACE TABLE covid (
     covid_id                    INT     PRIMARY KEY  IDENTITY,
     business_id                 TEXT,
@@ -172,7 +209,11 @@ CREATE OR REPLACE TABLE covid (
     CONSTRAINT FK_COVID_BUSINESS_ID   FOREIGN KEY(business_id)    REFERENCES  business(business_id)
 );
 
-/* Table temperature */
+/* 
+==========================================================================================================
+Create Temperature table 
+==========================================================================================================
+*/
 CREATE OR REPLACE TABLE temperature (
     temperature_id              INT     PRIMARY KEY  IDENTITY,
     date                        DATE,
@@ -182,7 +223,11 @@ CREATE OR REPLACE TABLE temperature (
     temp_normal_max             FLOAT
 );
 
-/* Table precipitation */
+/* 
+==========================================================================================================
+Create Precipitation table 
+==========================================================================================================
+*/
 CREATE OR REPLACE TABLE precipitation (
     precipitation_id            INT     PRIMARY KEY  IDENTITY,
     date                        DATE,
