@@ -79,7 +79,7 @@ CREATE OR REPLACE TABLE business_attributes (
 
 /* 
 ==========================================================================================================
-Create Business table 
+Create Business Hours table 
 ==========================================================================================================
 */
 CREATE OR REPLACE TABLE business_hours (

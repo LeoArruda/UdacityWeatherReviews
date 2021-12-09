@@ -11,7 +11,13 @@ USE SCHEMA "UDACITY_FINAL_PROJECT"."ODS_SCHEMA";
 ==========================================================================================================
  SQL queries code that reports the business name, review stars, and temperature minimum and maximum.
 ==========================================================================================================
+==========================================================================================================
+ In this query, I'm connecting the Yelp Data and Climate data, joining the records by transforming the
+ Timestamp to Date from Yelp data with the Climate Date.
+ With that, I can identify when the reviews happened and how was the weather at that moment.
+==========================================================================================================
 */
+
 
 SELECT BUSINESS.NAME, 
        AVG(REVIEW.STARS) AS "AVERAGE STARS",
