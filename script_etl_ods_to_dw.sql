@@ -48,6 +48,8 @@ FROM ODS_SCHEMA.date_time AS dtime;
 /*
 ==========================================================================================================
 Load Dimension table Weather 
+
+   ***  Consolidating the tables Temperature and Precipitation into the dimension Weather  ***
 ==========================================================================================================
 */
 INSERT INTO dimWeather ( date,temp_min,temp_max,temp_normal_min,temp_normal_max, precipitation, precipitation_normal )
